@@ -99,3 +99,31 @@ def test_elect_by_object_id():
     object_id = "67e8492e8eeedae82a4abea1"
     response = orders_repository.select_by_object_id(object_id)
     print(response)
+
+@pytest.mark.skip(reason="edit test documents")
+def test_edit_registry():
+    orders_repository = OrdersRepository(conn)
+    object_id = "67e5889357017c49e06572be"
+    set_cupom = True
+    orders_repository.edit_registry(object_id, set_cupom)
+
+@pytest.mark.skip(reason="edit test documents")
+def test_edit_registry_itens():
+    orders_repository = OrdersRepository(conn)
+    object_id = "67e5889357017c49e06572be"
+    set_quantity  = 2
+    type_item = "calabreza"
+    orders_repository.edit_registry_itens(object_id, set_quantity , type_item)
+
+@pytest.mark.skip(reason="edit test documents")
+def test_edit_many_registry():
+    orders_repository = OrdersRepository(conn)
+    set_quantity  = 1
+    orders_repository.edit_many_registry(set_quantity)
+@pytest.mark.skip(reason="edit test documents")
+def test_edit_registry_with_increment():
+    orders_repository = OrdersRepository(conn)
+    object_id = "67e5889357017c49e06572be"
+    #set_quantity = -1 "decremento"
+    set_quantity = 1
+    orders_repository.edit_registry_with_increment(object_id, set_quantity)
