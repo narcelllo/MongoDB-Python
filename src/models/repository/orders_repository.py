@@ -32,6 +32,7 @@ class OrdersRepository:
             {"_id": 0, "cupom": 0} #opção de retorno 
         )
         return data
+    
     def select_if_property_exists(self) -> dict:
         collection = self.__db_connection.get_collection(self.__collection_name)
         response = collection.find({"addres": {"$exists": True}},
@@ -70,4 +71,14 @@ class OrdersRepository:
         collection.update_one(
             {"_id": ObjectId(object_id)},
             {"$inc": {"itens.pizza.quantidade": set_quantity }}
+        )
+
+    def  delete_registry(self, object_id: str) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.delete_one({"_id": ObjectId(object_id)})
+
+    def  delete_many_registrys(self, object_id: str) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.delete_many(
+            {"itens.refrigerante": {"$exists": True}},
         )
