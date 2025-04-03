@@ -1,13 +1,13 @@
 from datetime import datetime
 from src.models.repository.interfaces.orders_repository import OrdersRepositoryInterface
-from src.main.http_types.http_request import HttpRequiest
+from src.main.http_types.http_request import HttpRequest
 from src.main.http_types.http_response import HttpResponse
 
 class RegistryOrder:
     def __init__(self, orders_repository: OrdersRepositoryInterface):
         self.__orders_repository = orders_repository
         
-    def registry(self, http_request: HttpRequiest) -> HttpResponse:
+    def registry(self, http_request: HttpRequest) -> HttpResponse:
         try:
             body = http_request.body
             new_order = self.__format_new_order(body)
