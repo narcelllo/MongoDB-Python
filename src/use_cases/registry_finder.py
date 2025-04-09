@@ -12,20 +12,21 @@ class RegistryFinder:
         try:
             order_id = http_request.params["order_id"]
             order = self.__search_order(order_id)
-            self.__format_response(order)
+            return self.__format_response(order)
         except Exception as exception:
             return error_handler(exception)
 
-    def search_order(self, order_id: str) -> dict:
+    def __search_order(self, order_id: str) -> dict:
         order = self.__orders_repository.select_by_object_id(order_id)
         if not order: raise HttpNotFoundError("order not found")
         return order
     
     def __format_response(self, order: dict) -> HttpResponse:
+        order["_id"] = str(order["_id"])
         return HttpResponse(
             body={
                 "data":{
-                    "type": "Order",
+                    "type": "order",
                     "count": 1,
                     "attributes": order
                 }

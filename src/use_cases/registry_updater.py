@@ -30,7 +30,7 @@ class RegistryUpdater:
         return HttpResponse(
             body={
                 "data":{
-                    "type": "Order",
+                    "type": "order",
                     "count": 1,
                     "oreder_id": order_id
                 }
